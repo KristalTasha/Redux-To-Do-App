@@ -1,0 +1,33 @@
+.todo_form{
+    padding: 3px;
+    width: 100%;
+    box-shadow: 1px 1px 4px 2px rgba(42, 20, 0, 0.621);
+    height: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2em;
+    background-color: rgba(30, 15, 9, 0.4);
+
+}
+
+.todo_input{
+    padding-left: 3px;
+    width: 400px;
+    height: 1.8em;
+    outline: none;
+}
+
+.submit{
+    background-color: rgb(48, 32, 27);
+    color: white;
+    border: none;
+    height: 2.3em;
+    font-size: 0.8em;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.submit:hover{
+    background-color: rgb(89, 49, 37);
+}
