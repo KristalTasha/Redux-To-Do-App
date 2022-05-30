@@ -1,6 +1,10 @@
-import React from 'react'
-import '../styles/ListItem.css'
-import styled, { css } from 'styled-components'
+import  React from 'react'
+import { deleteTodo, completeTodo } from '../store/actions/action';
+import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+import '../styles/ListItem.css';
+import styled, { css } from 'styled-components';
+
 
 const Item = styled.div`
 display: flex;
@@ -30,7 +34,7 @@ border-radius: 4px;
 font-size: 0.6em;
 color: white;
 
-${props => props.completed && css`
+${props => props.status && css`
     background-color: green;
 
 `}
@@ -45,17 +49,44 @@ ${props => props.delete && css`
 const BtnCont = styled.div`
 display: flex;
 gap: 0.5em;
+
 `
 
-export default function ListItem({ task }) {
+
+
+const ListItem = ({ task, delTodo, doneTodo, allTodos }) => {
+  
+
     return (
         <Item>
             <TaskText>{task.text}</TaskText>
             <BtnCont>
-                <Button completed>Completed</Button>
-                <Button delete>Delete</Button>
+                { task.isCompleted === false ?
+                    <Button status onClick={() => { doneTodo(task.id); allTodos()}}>Pending</Button>
+                    :
+                    <Button status onClick={() => { doneTodo(task.id); allTodos()}}>Completed</Button>
+                }
+
+                <Button delete onClick={() => { delTodo(task.id); console.log('delTodo run') }}>Delete</Button>
             </BtnCont>
 
         </Item>
     )
 }
+
+
+const mapStateToProps = (state) => ({
+    allTodos: () => state.todos
+})
+
+
+const mapDispatchToProps = (dispatch) => ({
+    
+    delTodo: id => dispatch(deleteTodo(id)),
+    doneTodo: (todoId) => dispatch(completeTodo(todoId))
+    
+})
+    
+  
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);

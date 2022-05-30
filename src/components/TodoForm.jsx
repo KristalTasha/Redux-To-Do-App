@@ -1,4 +1,4 @@
-import {useState, React } from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { createTodo } from '../store/actions/action';
 import TodoFormStyle from '../styles/TodoForm.module.css'
@@ -14,7 +14,7 @@ const TodoForm = ({allTodos, addTodo}) => {
     className={TodoFormStyle.todo_form}>
         <input type='text' className={TodoFormStyle.todo_input} value={inputVal} onChange={(e) => setInput(e.target.value)} />
         <button className={TodoFormStyle.submit}
-        onClick={() => addTodo(inputVal)}>Add Task</button>
+        onClick={() => { addTodo(inputVal); setInput('')}}>Add Task</button>
     </form>
   )
 }

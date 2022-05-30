@@ -1,7 +1,9 @@
 import React from 'react'
 import TodoForm from './TodoForm'
 import ListItem from './ListItem'
+import { connect } from 'react-redux';
 import styled from 'styled-components'
+
 
 const ListWrapper = styled.div`
 width: 60%;
@@ -15,6 +17,7 @@ align-self: center;
 padding-top: 2em;
 padding-bottom: 2em;
 border-radius: 5px;
+gap: 1em;
 
 `
 
@@ -26,16 +29,36 @@ gap: 2em;
 
 `
 
-export default function TodoList({ todos = [{ text: 'jogging' }] }) {
+const TodoList = ({ allTodos }) => {
+    console.log(allTodos)
+
     return (
         <ListCont>
             <TodoForm />
-            <ListWrapper>
-                {todos.map((todo, key) => (
-                    <ListItem task={todo} key={key} />
-                ))}
-            </ListWrapper>
+            {
+                allTodos.length !== 0
+                    ?
+                    <ListWrapper>
+                        {allTodos.map((todo) => (
+                            <ListItem task={todo} key={todo.id} />
+                        ))}
+                    </ListWrapper>
+                    :
+                    <ListWrapper>
+                     <p>No items to display</p>
+                     </ListWrapper>
+            
+            }
+
 
         </ListCont>
     )
 }
+
+
+
+const mapStateToProps = (state) => ({
+    allTodos: state.todos
+})
+
+export default connect(mapStateToProps)(TodoList);
