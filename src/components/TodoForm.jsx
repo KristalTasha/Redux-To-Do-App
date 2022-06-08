@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { createTodo } from '../store/actions/action';
+import { addNewTodo } from '../store/thunk/thunk';
 import TodoFormStyle from '../styles/TodoForm.module.css'
 
 
@@ -25,8 +26,14 @@ const mapStateToProps = (state) => ({
     allTodos: state.todos
 })
 
+//adding todo from action
+// const mapDispatchToProps = (dispatch) => ({
+//     addTodo: text => dispatch(createTodo(text))
+// })
+
+//adding todo from thunk
 const mapDispatchToProps = (dispatch) => ({
-    addTodo: text => dispatch(createTodo(text))
+  addTodo: text => dispatch(addNewTodo(text))
 })
 
 //connect 'connects' the store to the component TodoForm

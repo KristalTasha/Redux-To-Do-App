@@ -1,12 +1,16 @@
-import { CREATE_TODO, DELETE_TODO, COMPLETE_TODO } from '../actions/action'
+import { CREATE_TODO, DELETE_TODO, COMPLETE_TODO, FETCH_TODOS,
+ TODOS_LOADING, TODOS_SUCCESS, TODOS_FAILURE} from '../actions/action'
 
 export const todos = (state = [], action) => {
     switch (action.type) {
 
         case CREATE_TODO: {
-            const newTodo = action.payload
-            console.log('reducer newTodo', newTodo);
-            return [...state, newTodo]
+            console.log('action createTodo', action)
+            return [...state, action.payload.text]
+
+            // const newTodo = action.payload
+            // console.log('reducer newTodo', newTodo);
+            // return [...state, newTodo]
         }
 
         case DELETE_TODO: {
@@ -35,6 +39,13 @@ export const todos = (state = [], action) => {
 
         }
 
+        case FETCH_TODOS : {
+            console.log('the data', action.payload.data);
+
+
+            return action.payload.data;
+        }
+
         default:
             return state;
 
@@ -42,26 +53,25 @@ export const todos = (state = [], action) => {
     }
 }
 
-// export const remaningTodos = (todos, action) => {
-//     switch (action.type) {
 
-//         case DELETE_TODO: {
-//             const todoId = action.payload
-//             console.log('todoId', todoId)
-//            const others =  todos.filter(item => item.id !== todoId);
-//            return [...others]
-                
-//                 // let pos = todos.indexOf(item)
-//                 // return todos.splice(pos, 1)
-            
+export const loading = (isLoading = false, action) => {
+    switch(action.type){
+        case TODOS_LOADING: {
+            return isLoading = true;
+        }
 
-//             // todos.splice(todos.findIndex(item => item.id === todoId), 1)
-//             // console.log('todos')
-//             // return todos;
+        case TODOS_SUCCESS: {
+            return { 
+                isLoading : false,
+                data: action.payload.todos
+            };
+        }
 
-//         }
+        case TODOS_FAILURE: {
+            return isLoading = false;
+        }
 
-//         default:
-//             return todos;
-//     }
-// }
+        default:
+            return isLoading
+    }
+}

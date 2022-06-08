@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import TodoForm from './TodoForm'
 import ListItem from './ListItem'
+import { fetchTodos } from '../store/thunk/thunk';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
 
@@ -29,8 +30,11 @@ gap: 2em;
 
 `
 
-const TodoList = ({ allTodos }) => {
-    console.log(allTodos)
+const TodoList = ({ allTodos, getTodoItems }) => {
+    console.log('the data', allTodos)
+    useEffect(() => {
+        getTodoItems()
+    }, [])
 
     return (
         <ListCont>
@@ -57,8 +61,18 @@ const TodoList = ({ allTodos }) => {
 
 
 
+//fetching todos from state
+// const mapStateToProps = (state) => ({
+//     allTodos: state.todos
+// })
+
+//fetching todos from thunk and axios
+const mapDispatchToProps = (dispatch) => ({
+    getTodoItems: () => dispatch(fetchTodos())
+})
+
 const mapStateToProps = (state) => ({
     allTodos: state.todos
 })
 
-export default connect(mapStateToProps)(TodoList);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

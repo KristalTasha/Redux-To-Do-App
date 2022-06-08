@@ -1,6 +1,7 @@
 import  React from 'react'
 import { deleteTodo, completeTodo } from '../store/actions/action';
 import { connect } from 'react-redux';
+import { removeTodo, updateTodo } from '../store/thunk/thunk';
 // import { bindActionCreators } from 'redux';
 import '../styles/ListItem.css';
 import styled, { css } from 'styled-components';
@@ -79,13 +80,22 @@ const mapStateToProps = (state) => ({
     allTodos: () => state.todos
 })
 
-
+//original delete function
 const mapDispatchToProps = (dispatch) => ({
     
-    delTodo: id => dispatch(deleteTodo(id)),
-    doneTodo: (todoId) => dispatch(completeTodo(todoId))
+    // delTodo: id => dispatch(deleteTodo(id)),
+    delTodo: id => dispatch(removeTodo(id)),
+    doneTodo: (todoId) => dispatch(updateTodo(todoId))
     
 })
+
+//including thunk
+// const mapDispatchToProps = (dispatch) => ({
+    
+//     delTodo: () => dispatch(fetchTodos()),
+//     doneTodo: (todoId) => dispatch(completeTodo(todoId))
+    
+// })
     
   
 
