@@ -1,0 +1,17 @@
+GET http://localhost:7070/todos
+Content-Type: application/json
+
+# POST http://localhost:7070/addTodos
+# content-type: application/json
+
+# {
+#     "text": "wash"
+# }
+
+# DELETE http://localhost:7070/deleteTodo/2
+# content-type: application/json
+
+# PUT http://localhost:7070/updateTodo/3
+# content-type: application/json
+
+
