@@ -40,7 +40,7 @@ export const todos = (state = [], action) => {
         }
 
         case FETCH_TODOS : {
-            console.log('the data', action.payload.data);
+           // console.log('the data', action.payload.data);
 
 
             return action.payload.data;
@@ -61,10 +61,9 @@ export const loading = (isLoading = false, action) => {
         }
 
         case TODOS_SUCCESS: {
-            return { 
-                isLoading : false,
-                data: action.payload.todos
-            };
+            return  isLoading = false
+                //data: action.payload.todos
+            //};
         }
 
         case TODOS_FAILURE: {

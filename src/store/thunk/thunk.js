@@ -2,11 +2,6 @@ import axios from 'axios';
 import { getTodos, createTodo, deleteTodo, completeTodo, loadingTodos, loadSuccess, loadFailure } from '../actions/action';
 
 
-// export const testingThunk = () => () => {
-//     alert('this is from the thunk middleware')
-// }
-
-
 
 export const fetchTodos = () => async (dispatch, getState) => {
     try {
@@ -18,15 +13,16 @@ export const fetchTodos = () => async (dispatch, getState) => {
 
         //fetching from locahlost
         const response = await axios.get('http://localhost:7070/todos')
-        console.log('the response', response)
+        //console.log('the response', response)
         // dispatch({ type: FETCH_TODOS, payload: response.data });
         dispatch(getTodos(response.data));
 
         //
-        dispatch(loadSuccess(response.data))
-        console.log('this is the state', getState());
+        dispatch(loadSuccess())
+        //console.log('this is the state', getState());
 
     } catch (error) {
+        dispatch(loadFailure());
         console.log(error)
     }
 
@@ -38,7 +34,7 @@ export const addNewTodo = (text) => async (dispatch) => {
             text
         })
        const { data } = response;
-        console.log('the post response', response)
+        //console.log('the post response', response)
 
         dispatch(createTodo(data));
         
@@ -52,9 +48,10 @@ export const removeTodo = (id) => async (dispatch) => {
     try{
         const response = await axios.delete(`http://localhost:7070/deleteTodo/${id}`)
 
-        const { data } = response;
 
+        //console.log('id', id)
         dispatch(deleteTodo(id));
+
     } catch(error){
         console.log('delete error---', error)
     }

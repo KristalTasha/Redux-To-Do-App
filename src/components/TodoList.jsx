@@ -30,10 +30,12 @@ gap: 2em;
 
 `
 
-const TodoList = ({ allTodos, getTodoItems }) => {
-    console.log('the data', allTodos)
+const TodoList = ({ allTodos, getTodoItems, loader }) => {
+    // console.log('the data', allTodos)
+    console.log('loading state---', loader)
     useEffect(() => {
         getTodoItems()
+        
     }, [])
 
     return (
@@ -72,7 +74,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-    allTodos: state.todos
+    allTodos: state.todos,
+    loader: state.loading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

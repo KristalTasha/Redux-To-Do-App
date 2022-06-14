@@ -55,11 +55,14 @@ export const loadingTodos = () => ({
 
 export const TODOS_SUCCESS = 'TODOS_SUCCESS'
 
-export const loadSuccess = (todos) => ({
-    type: TODOS_SUCCESS,
-    payload: { todos }
-})
+// export const loadSuccess = (todos) => ({
+//     type: TODOS_SUCCESS,
+//     payload: { todos }
+// })
 
+export const loadSuccess = (todos) => ({
+    type: TODOS_SUCCESS
+})
 
 export const TODOS_FAILURE = 'TODOS_FAILURE'
 
