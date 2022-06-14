@@ -20,33 +20,79 @@ app.use(cors({
 
 // app.use(cors());
 
-let tid = 1;
-let taskID = tid.toString()
-console.log(taskID)
+// let tid = 1;
+// let taskID = tid.toString()
+// console.log(taskID)
 
-let tasks = [{
-        id: `${taskID++}`,
-        text: 'eat',
-        isCompleted: false
-    },
+let tasks = [];
 
-    {
-        id: `${taskID++}`,
-        text: 'work',
-        isCompleted: false
-    },
+// let tasks = [{
+//         id: `${taskID++}`,
+//         text: 'eat',
+//         isCompleted: false
+//     },
 
-    {
-        id: `${taskID++}`,
-        text: 'buy rice',
-        isCompleted: true
-    },
+//     {
+//         id: `${taskID++}`,
+//         text: 'work',
+//         isCompleted: false
+//     },
 
-]
+//     {
+//         id: `${taskID++}`,
+//         text: 'buy rice',
+//         isCompleted: true
+//     },
+
+// ]
 
 app.get('/todos', (req, res) => {
     res.status(200).json(tasks);
 })
+
+// app.post('/addTodos', (req, res) => {
+//     try{
+//         const {
+//             text
+//         } = req.body
+
+//         let TID;
+//         let lastID;
+//         let newID;
+
+//         if(tasks){
+//             TID = tasks.length - 1
+//             lastID = tasks[TID].id
+//             newID = parseInt(lastID) + 1
+//         } else{
+//             newID = 1;
+//         }
+
+     
+    
+//         if (text) {
+//             const newTodo = {
+//                 id: `${newID++}`,
+//                 text: text,
+//                 isCompleted: false
+//             }
+    
+//             tasks.push(newTodo);
+//             res.status(200).json(newTodo)
+//         } else {
+//             res.status(400).json({
+//                 message: 'Input text please'
+//             })
+//         }
+//     }catch(error){
+//         res.status(400).json({
+//             message: 'Unable to add new todo',
+//             error
+//         })
+    
+//     }
+    
+// })
 
 app.post('/addTodos', (req, res) => {
     try{
@@ -54,13 +100,11 @@ app.post('/addTodos', (req, res) => {
             text
         } = req.body
 
-        let TID = tasks.length - 1
-        let lastID = tasks[TID].id
-        let newID = parseInt(lastID) + 1
+     
     
         if (text) {
             const newTodo = {
-                id: `${newID++}`,
+                id: uuidv4(),
                 text: text,
                 isCompleted: false
             }
