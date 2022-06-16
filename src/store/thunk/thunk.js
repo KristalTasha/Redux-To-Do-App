@@ -15,10 +15,10 @@ export const fetchTodos = () => async (dispatch, getState) => {
         const response = await axios.get('http://localhost:7070/todos')
         //console.log('the response', response)
         // dispatch({ type: FETCH_TODOS, payload: response.data });
-        dispatch(getTodos(response.data));
+        // dispatch(getTodos(response.data));
 
         //
-        dispatch(loadSuccess())
+        dispatch(loadSuccess(response.data))
         //console.log('this is the state', getState());
 
     } catch (error) {

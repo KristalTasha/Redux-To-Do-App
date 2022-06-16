@@ -51,14 +51,14 @@ const TodoList = ({ allTodos, getTodoItems, loader }) => {
                 allTodos.length !== 0
                     ?
                     <ListWrapper>
-                        {/* {allTodos.map((todo) => (
+                        {allTodos.map((todo) => (
                             <ListItem task={todo} key={todo.id} />
-                        ))} */}
+                        ))}
 
-                        {allTodos.map((todo, key) => {
+                        {/* {allTodos.map((todo, key) => {
                             console.log('the todo', todo)
                           return  <ListItem task={todo} key={todo.id} />
-                        })}
+                        })} */}
                     </ListWrapper>
                     :
                     <ListWrapper>
