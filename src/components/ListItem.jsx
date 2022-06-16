@@ -1,5 +1,5 @@
 import  React from 'react'
-import { deleteTodo, completeTodo } from '../store/actions/action';
+// import { deleteTodo, completeTodo } from '../store/actions/action';
 import { connect } from 'react-redux';
 import { removeTodo, updateTodo } from '../store/thunk/thunk';
 // import { bindActionCreators } from 'redux';
@@ -77,7 +77,7 @@ const ListItem = ({ task, delTodo, doneTodo, allTodos }) => {
 
 
 const mapStateToProps = (state) => ({
-    allTodos: () => state.todos
+    allTodos: () => state.todos.data
 })
 
 //original delete function

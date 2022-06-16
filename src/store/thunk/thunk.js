@@ -34,7 +34,7 @@ export const addNewTodo = (text) => async (dispatch) => {
             text
         })
        const { data } = response;
-        //console.log('the post response', response)
+        console.log('the post response data', data)
 
         dispatch(createTodo(data));
         

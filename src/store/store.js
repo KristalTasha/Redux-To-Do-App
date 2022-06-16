@@ -1,13 +1,13 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { todos, loading } from './reducers/reducer';
+import { todos } from './reducers/reducer';
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
 
 const reducers = {
-    todos,
-    loading
+    todos
+    //loading
 };
 
 //the rootReducer containers all the reducers for carrying out a specific action

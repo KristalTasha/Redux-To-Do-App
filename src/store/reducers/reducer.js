@@ -1,13 +1,20 @@
 import { CREATE_TODO, DELETE_TODO, COMPLETE_TODO, FETCH_TODOS,
  TODOS_LOADING, TODOS_SUCCESS, TODOS_FAILURE} from '../actions/action'
 
-export const todos = (state = [], action) => {
+
+// const initialState = { data: [], loading: false}
+
+export const todos = (state = { data: [], loading: false}, action) => {
     switch (action.type) {
 
         case CREATE_TODO: {
             console.log('action createTodo', action)
-            return [...state, action.payload.text]
+            return {
+                ...state,
+                data: [...state.data, action.payload.text]
+            }
 
+            // [...state, action.payload.text]
             // const newTodo = action.payload
             // console.log('reducer newTodo', newTodo);
             // return [...state, newTodo]
@@ -42,8 +49,36 @@ export const todos = (state = [], action) => {
         case FETCH_TODOS : {
            // console.log('the data', action.payload.data);
 
+           return {
+               ...state,
+               loading: false,
+               data: action.payload.data
+           }
 
-            return action.payload.data;
+            // return action.payload.data;
+        }
+
+        case TODOS_LOADING: {
+            return {
+                ...state,
+                loading: true
+            }
+        }
+
+        case TODOS_SUCCESS: {
+            return {
+                ...state,
+                loading: false
+            }
+                //data: action.payload.todos
+            //};
+        }
+
+        case TODOS_FAILURE: {
+            return {
+                ...state,
+                loading: false
+            }
         }
 
         default:
@@ -54,23 +89,23 @@ export const todos = (state = [], action) => {
 }
 
 
-export const loading = (isLoading = false, action) => {
-    switch(action.type){
-        case TODOS_LOADING: {
-            return isLoading = true;
-        }
+// export const loading = (isLoading = false, action) => {
+//     switch(action.type){
+//         case TODOS_LOADING: {
+//             return isLoading = true;
+//         }
 
-        case TODOS_SUCCESS: {
-            return  isLoading = false
-                //data: action.payload.todos
-            //};
-        }
+//         case TODOS_SUCCESS: {
+//             return  isLoading = false
+//                 //data: action.payload.todos
+//             //};
+//         }
 
-        case TODOS_FAILURE: {
-            return isLoading = false;
-        }
+//         case TODOS_FAILURE: {
+//             return isLoading = false;
+//         }
 
-        default:
-            return isLoading
-    }
-}
+//         default:
+//             return isLoading
+//     }
+// }

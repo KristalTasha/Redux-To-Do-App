@@ -41,18 +41,33 @@ const TodoList = ({ allTodos, getTodoItems, loader }) => {
     return (
         <ListCont>
             <TodoForm />
+
+
             {
+              
+              //you can add a spinner component from reactstrap here
+              loader ? <ListWrapper>Loading...</ListWrapper> :
+
                 allTodos.length !== 0
                     ?
                     <ListWrapper>
-                        {allTodos.map((todo) => (
+                        {/* {allTodos.map((todo) => (
                             <ListItem task={todo} key={todo.id} />
-                        ))}
+                        ))} */}
+
+                        {allTodos.map((todo, key) => {
+                            console.log('the todo', todo)
+                          return  <ListItem task={todo} key={todo.id} />
+                        })}
                     </ListWrapper>
                     :
                     <ListWrapper>
                      <p>No items to display</p>
                      </ListWrapper>
+                
+                
+                
+                
             
             }
 
@@ -74,8 +89,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-    allTodos: state.todos,
-    loader: state.loading
+    allTodos: state.todos.data,
+    loader: state.todos.loading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

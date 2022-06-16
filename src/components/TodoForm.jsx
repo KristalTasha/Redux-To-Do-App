@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import { createTodo } from '../store/actions/action';
+// import { createTodo } from '../store/actions/action';
 import { addNewTodo } from '../store/thunk/thunk';
 import TodoFormStyle from '../styles/TodoForm.module.css'
 
@@ -23,7 +23,7 @@ const TodoForm = ({allTodos, addTodo}) => {
 
 
 const mapStateToProps = (state) => ({
-    allTodos: state.todos
+    allTodos: state.todos.data
 })
 
 //adding todo from action
