@@ -6,7 +6,7 @@ import {
 
 // const initialState = { data: [], loading: false}
 
-export const todos = (state = { data: [], loading: false }, action) => {
+export const todos = (state = { data: [], loading: false, errorMsg: null }, action) => {
     switch (action.type) {
 
         case CREATE_TODO: {
@@ -100,7 +100,8 @@ export const todos = (state = { data: [], loading: false }, action) => {
         case TODOS_FAILURE: {
             return {
                 ...state,
-                loading: false
+                loading: false,
+                errorMsg: action.payload.errorMsg
             }
         }
 

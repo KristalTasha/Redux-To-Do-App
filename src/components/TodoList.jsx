@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import TodoForm from './TodoForm'
 import ListItem from './ListItem'
 import { fetchTodos } from '../store/thunk/thunk';
+import { getTodosData, getTodosLoading, completedTodos, incompletedTodos } from '../store/selectors/selector';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
 
@@ -30,7 +31,7 @@ gap: 2em;
 
 `
 
-const TodoList = ({ allTodos, getTodoItems, loader }) => {
+const TodoList = ({ allTodos, getTodoItems, loader, compTodos, inCompTodos }) => {
     // console.log('the data', allTodos)
     console.log('loading state---', loader)
     useEffect(() => {
@@ -51,14 +52,22 @@ const TodoList = ({ allTodos, getTodoItems, loader }) => {
                 allTodos.length !== 0
                     ?
                     <ListWrapper>
-                        {allTodos.map((todo) => (
+                        {/* {allTodos.map((todo) => (
+                            <ListItem task={todo} key={todo.id} />
+                        ))} */}
+                        
+                        <h4>Completed</h4>
+                        {compTodos.map((todo) => (
                             <ListItem task={todo} key={todo.id} />
                         ))}
 
-                        {/* {allTodos.map((todo, key) => {
-                            console.log('the todo', todo)
-                          return  <ListItem task={todo} key={todo.id} />
-                        })} */}
+                        <h4>Pending</h4>
+                        {inCompTodos.map((todo) => (  
+                            <ListItem task={todo} key={todo.id} />
+                        ))}
+
+
+                       
                     </ListWrapper>
                     :
                     <ListWrapper>
@@ -88,9 +97,16 @@ const mapDispatchToProps = (dispatch) => ({
     getTodoItems: () => dispatch(fetchTodos())
 })
 
+// const mapStateToProps = (state) => ({
+//     allTodos: state.todos.data,
+//     loader: state.todos.loading
+// })
+
 const mapStateToProps = (state) => ({
-    allTodos: state.todos.data,
-    loader: state.todos.loading
+    allTodos: getTodosData(state),
+    loader: getTodosLoading(state),
+    compTodos: completedTodos(state),
+    inCompTodos: incompletedTodos(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

@@ -67,6 +67,9 @@ export const loadSuccess = (data) => ({
 
 export const TODOS_FAILURE = 'TODOS_FAILURE'
 
-export const loadFailure = (todos) => ({
-    type: TODOS_FAILURE
+export const loadFailure = (errorMsg) => ({
+    type: TODOS_FAILURE,
+    payload: {
+        errorMsg
+    }
 })
