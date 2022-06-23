@@ -126,17 +126,21 @@ app.post('/addTodos', (req, res) => {
     
 })
 
+
+
 app.delete('/deleteTodo/:id', (req, res) => {
 
     try {
        let todoId = req.params.id;
        console.log('id being deleted', todoId)
 
+       const matchTodo = tasks.find(task => task.id === todoId)
+
 
         tasks = tasks.filter(task => task.id !== todoId)
 
         console.log('remainder', tasks)
-        res.status(200).json(tasks)
+        res.status(200).json(matchTodo)
 
     } catch (error) {
         res.status(400).json({
@@ -148,22 +152,22 @@ app.delete('/deleteTodo/:id', (req, res) => {
 
 })
 
+
+
+
+//returning the updated item
 app.put('/updateTodo/:id', (req, res) => {
 
     const { id } = req.params;
 
-    // const matchTodo = tasks.find(task => task.id === id)
+    const matchTodo = tasks.find(task => task.id === id)
 
-    tasks = tasks.map(item => {
-        return item.id === id ? {...item, isCompleted: !item.isCompleted} : {...item}
-    })
+    matchTodo.isCompleted = !matchTodo.isCompleted
+ 
 
-    console.log(tasks)
+    console.log('updated todo', matchTodo)
 
-    res.status(200).json(tasks);
-
-   
-  
+    res.status(200).json(matchTodo);
 
 
 })
@@ -172,6 +176,49 @@ app.listen(PORT, () => console.log(`server listening on port ${PORT}`))
 
 
 
+
+// app.delete('/deleteTodo/:id', (req, res) => {
+
+//     try {
+//        let todoId = req.params.id;
+//        console.log('id being deleted', todoId)
+
+
+//         tasks = tasks.filter(task => task.id !== todoId)
+
+//         console.log('remainder', tasks)
+//         res.status(200).json(tasks)
+
+//     } catch (error) {
+//         res.status(400).json({
+//             message: 'Unable to delete',
+//             error
+//         })
+//     }
+
+
+// })
+
+
+
+
+// returning updated list of todos
+// app.put('/updateTodo/:id', (req, res) => {
+
+//     const { id } = req.params;
+
+//     // const matchTodo = tasks.find(task => task.id === id)
+
+//     tasks = tasks.map(item => {
+//         return item.id === id ? {...item, isCompleted: !item.isCompleted} : {...item}
+//     })
+
+//     console.log(tasks)
+
+//     res.status(200).json(tasks);
+
+
+// })
 
 
     // try{
